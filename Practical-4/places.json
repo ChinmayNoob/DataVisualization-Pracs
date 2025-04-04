@@ -1,0 +1,23 @@
+[
+    {
+      "name": "Taj Mahal",
+      "location": [27.1751, 78.0421]
+    },
+    {
+      "name": "Qutub Minar",
+      "location": [28.5245, 77.1855]
+    },
+    {
+      "name": "Mysore Palace",
+      "location": [12.3051, 76.6551]
+    },
+    {
+      "name": "Gateway of India",
+      "location": [18.9220, 72.8347]
+    },
+    {
+      "name": "Golden Temple",
+      "location": [31.6200, 74.8765]
+    }
+  ]
+  

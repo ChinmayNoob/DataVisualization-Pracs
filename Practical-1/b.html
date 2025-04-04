@@ -1,0 +1,97 @@
+<!-- Develop the different Advanced Graphical Shapes like column Chart, Pie Chart, Chart with text using html5 canvas  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Charts Demo</title>
+  <style>
+    canvas {
+      display: block;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Canvas Charts Demo</h2>
+
+  <canvas id="columnChart" width="400" height="200"></canvas>
+  <canvas id="pieChart" width="200" height="200"></canvas>
+  <canvas id="textChart" width="400" height="200"></canvas>
+
+  <script>
+    
+    // Column Chart
+    const columnCanvas = document.getElementById('columnChart').getContext('2d');
+    const columnData = [50, 80, 60, 100, 40];
+    columnData.forEach((value, index) => {
+      columnCanvas.fillStyle = 'skyblue';
+      columnCanvas.fillRect(index * 70 + 20, 200 - value, 50, value);
+      columnCanvas.strokeRect(index * 70 + 20, 200 - value, 50, value);
+    });
+
+    // // Pie Chart
+    const pieCanvas = document.getElementById('pieChart').getContext('2d');
+    const pieData = [30, 20, 50];
+    const colors = ['red', 'green', 'blue'];
+    let startAngle = 0;
+    const total = pieData.reduce((acc, val) => acc + val, 0);
+
+    pieData.forEach((value, index) => {
+      const sliceAngle = (value / total) * 2 * Math.PI;
+      pieCanvas.beginPath();
+      pieCanvas.moveTo(100, 100);
+      pieCanvas.arc(100, 100, 100, startAngle, startAngle + sliceAngle);
+      pieCanvas.closePath();
+      pieCanvas.fillStyle = colors[index];
+      pieCanvas.fill();
+      startAngle += sliceAngle;
+    });
+
+    const canvas = document.getElementById('textChart');
+    const ctx = canvas.getContext('2d');
+    
+    const data = [
+      { label: 'Product A', value: 50 },
+      { label: 'Product B', value: 80 },
+      { label: 'Product C', value: 30 },
+      { label: 'Product D', value: 65 }
+    ];
+    
+    const margin = 50;
+    const width = canvas.width - 2 * margin;
+    const height = canvas.height - 2 * margin;
+    const barWidth = 40;
+    const spacing = 20;
+    
+    ctx.beginPath();
+    ctx.moveTo(margin, canvas.height - margin);
+    ctx.lineTo(canvas.width - margin, canvas.height - margin);
+    ctx.stroke();
+    
+    ctx.beginPath();
+    ctx.moveTo(margin, margin);
+    ctx.lineTo(margin, canvas.height - margin);
+    ctx.stroke();
+    
+    data.forEach((item, index) => {
+      const x = margin + index * (barWidth + spacing);
+      const barHeight = item.value * 1.5;
+      const y = canvas.height - margin - barHeight;
+      
+      ctx.fillStyle = 'lightblue';
+      ctx.fillRect(x, y, barWidth, barHeight);
+      ctx.strokeRect(x, y, barWidth, barHeight);
+      
+      ctx.fillStyle = 'black';
+      ctx.font = '12px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText(item.label, x + barWidth/2, canvas.height - margin + 15);
+      
+      ctx.fillStyle = 'black';
+      ctx.fillText(item.value, x + barWidth/2, y - 5);
+    });
+  </script>
+</body>
+</html>

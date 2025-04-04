@@ -1,0 +1,43 @@
+<!-- Using Google Charts API Basics draw charts like a Candle chart using GoogleApis and Bar Chart -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script src="chartsApi.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Candle Chart</h1>
+        <div class="chart-container">
+            <div id="bar-chart" class="chart">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+
+    google.charts.load('current', {'packages':['corechart']});
+    
+    google.charts.setOnLoadCallback(renderChart);
+    
+    function renderChart() {
+        var data = google.visualization.arrayToDataTable([
+      ['Mon', 20, 28, 38, 45],
+      ['Tue', 31, 38, 55, 66],
+      ['Wed', 50, 55, 77, 80],
+      ['Thu', 77, 77, 66, 50],
+      ['Fri', 68, 66, 22, 15]
+    ], true);
+        var options = {
+            legend: { position: 'none' },
+            height:600,
+            width:500,
+        };
+        var chart = new google.visualization.CandlestickChart(document.getElementById("bar-chart"));
+        chart.draw(data,options);
+    }
+    </script>
+</body>
+</html>

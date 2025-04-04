@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Sales Chart</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .chart {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+        .bar {
+            width: 60px;
+            background-color: blue;
+            color: white;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+            transition: height 0.5s ease-in-out;
+        }
+        .label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: black;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Album Sales Chart</h2>
+    <div class="chart" id="salesChart"></div>
+
+    <script>
+        $(document).ready(function () {
+    $.getJSON("sales.json", function (data) {
+        var chart = $("#salesChart");
+
+        // Access the album array inside the JSON data
+        var albums = data.album;
+
+        // Find the maximum sales value
+        var maxSales = Math.max(...albums.map(item => item.sales));
+        var scaleFactor = 300 / maxSales;
+
+        // Loop through each album and create the bars
+        albums.forEach(function (album) {
+            var barHeight = Math.round(album.sales * scaleFactor);
+            var displaySales = (album.sales / 1000) + "K";
+
+            var barWrapper = $("<div></div>").addClass("bar-wrapper");
+            var bar = $("<div></div>").addClass("bar").css({ height: barHeight + "px" }).text(displaySales);
+            var label = $("<div></div>").addClass("label").text(album.name);
+
+            barWrapper.append(bar, label);
+            chart.append(barWrapper);
+        });
+    });
+});
+    </script>
+</body>
+</html>

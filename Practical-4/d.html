@@ -1,0 +1,43 @@
+<!-- Using Google Charts API Basics draw charts like a Donut chart using GoogleApis and Bar Chart -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script src="chartsApi.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Donut Chart</h1>
+        <div class="chart-container">
+            <div id="bar-chart" class="chart">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+
+    google.charts.load('current', {'packages':['corechart']});
+    
+    google.charts.setOnLoadCallback(renderChart);
+    
+    function renderChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Product','Sales'],
+            ['Shoes',20],
+            ['Hats',30],
+            ['Coat',50],
+        ]);
+        var options = {
+            title:"Product Sales",
+            pieHole:0.4,
+            height:600,
+            width:500,
+        };
+        var chart = new google.visualization.PieChart(document.getElementById("bar-chart"));
+        chart.draw(data,options);
+    }
+    </script>
+</body>
+</html>

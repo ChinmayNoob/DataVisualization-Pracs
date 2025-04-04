@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Chart</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="barchart" width="500" height="500"></canvas>
+    <script>
+        $(document).ready(function() {
+            const canvas = $('#barchart')[0];
+            const ctx = canvas.getContext('2d');
+
+            const data = [100, 200, 150, 250, 300];
+            const labels = ['A', 'B', 'C', 'D', 'E'];
+
+            const barWidth = 50;
+            const barSpacing = 10;
+            const startX = 10;
+
+            ctx.font = '16px Arial';
+
+            $.each(data, function(index, value) {
+                const x = startX + index * (barWidth + barSpacing);
+                const y = canvas.height - value;
+
+                // Draw the bar
+                ctx.fillStyle = '#3498db';
+                ctx.fillRect(x, y, barWidth, value);
+
+                // Draw the label
+                ctx.fillStyle = '#000';
+                ctx.fillText(labels[index], x + barWidth / 4, canvas.height - 5);
+            });
+        });
+    </script>
+</body>
+</html>

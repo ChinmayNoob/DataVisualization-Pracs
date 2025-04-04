@@ -1,0 +1,48 @@
+<!-- Read the data .txt file and draw Data Table -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        td {
+            padding: 4px;
+        }
+    </style>
+ </head>
+ <body>
+    <table id="datatable" border="2" width="900">
+        <th>Sr No</th>
+        <th>Artist Name</th>
+        <th>Album Name</th>
+    </table>
+    <script>
+        $(document).ready(function(){
+            $.get("albums.txt",function(line){
+                var lines = line.split("\n")
+                for(i=0;i<lines.length;i++){
+                    var cols = lines[i].split(" ");
+                    var row = `
+                    <tr>
+                        <td>${cols[0]}</td>
+                        <td>${cols[1]}</td>
+                        <td>${cols[2]}</td>
+                    </tr>
+                    `
+                    $("#datatable").append(row);
+                }
+            })
+        })
+    </script>
+ </body>
+ </html>

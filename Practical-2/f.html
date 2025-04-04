@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+     
+            td {
+                padding: 4px;
+            }
+        </style>
+    </head>
+        <body>
+            <table id="p1" border="1">
+                    <th>Name</th>
+                    <th>Enrollment-No</th>
+                    <th>Department</th>    
+            </table>
+        <script>
+            $(document).ready(function () {
+            $.get("student.xml", function (d1) {
+                $(d1).find("student").each(function () {
+                    var name = $(this).find("name").text();
+                    var id = $(this).find("enrollment").text();
+                    var department = $(this).find("department").text();
+                    var row = `<tr>
+                        <td>${name}</td>
+                        <td>${id}</td>  
+                        <td>${department}</td>  
+                    </tr>`;
+                    $("#p1").append(row)
+                })
+            })
+        })
+        </script>
+        </body>
+</html>

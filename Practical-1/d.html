@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Advanced Charts</title>
+  <style>
+    svg {
+      border: 1px solid #ccc;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">SVG Advanced Charts</h2>
+
+  <!-- Column Chart -->
+  <h3 style="text-align: center;">Column Chart</h3>
+  <svg width="400" height="200">
+    <rect x="20" y="100" width="50" height="100" fill="skyblue" />
+    <text x="25" y="95" fill="black">Item 1</text>
+    <rect x="90" y="80" width="50" height="120" fill="lightgreen" />
+    <text x="95" y="75" fill="black">Item 2</text>
+    <rect x="160" y="50" width="50" height="150" fill="coral" />
+    <text x="165" y="45" fill="black">Item 3</text>
+  </svg>
+
+  <!-- Pie Chart -->
+  <h3 style="text-align: center;">Pie Chart</h3>
+  <svg width="200" height="200">
+    <circle cx="100" cy="100" r="100" fill="lightgray" />
+    <path d="M100,100 L100,0 A100,100 0 0,1 180,50 Z" fill="red" />
+    <text x="140" y="30" fill="black">Red Slice</text>
+    <path d="M100,100 L180,50 A100,100 0 0,1 100,200 Z" fill="green" />
+    <text x="150" y="150" fill="black">Green Slice</text>
+    <path d="M100,100 L100,200 A100,100 0 0,1 100,0 Z" fill="blue" />
+    <text x="60" y="180" fill="black">Blue Slice</text>
+  </svg>
+
+  <!-- Line Chart -->
+  <h3 style="text-align: center;">Line Chart</h3>
+  <svg width="400" height="200">
+    <polyline points="20,180 60,120 100,140 140,100 180,80 220,60" 
+              fill="none" stroke="purple" stroke-width="2" />
+    <text x="20" y="190" fill="black">Start</text>
+    <text x="220" y="50" fill="black">End</text>
+  </svg>
+
+  <!-- Bar Chart -->
+  <h3 style="text-align: center;">Bar Chart</h3>
+  <svg width="400" height="200">
+    <rect x="50" y="50" width="30" height="100" fill="orange" />
+    <text x="55" y="45" fill="black">Bar 1</text>
+    <rect x="100" y="70" width="30" height="80" fill="blue" />
+    <text x="105" y="65" fill="black">Bar 2</text>
+    <rect x="150" y="90" width="30" height="60" fill="green" />
+    <text x="155" y="85" fill="black">Bar 3</text>
+  </svg>
+</body>
+</html>

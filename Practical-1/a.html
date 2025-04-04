@@ -1,0 +1,119 @@
+<!-- Develop the different basic graphical shapes like line,rectangle,circle using html  canvas  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        canvas {
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="c1" height="600" width="600">
+      
+    </canvas>
+    <script>
+
+        // rectangle 
+        var a = document.getElementById("c1");
+        var b = a.getContext("2d");
+        b.fillStyle="purple";
+        b.fillRect(250,50,80,100);
+
+        // outline rectangle 
+        b.lineWidth="2";
+        b.strokeStyle="red"
+        b.rect(500,100,40,20);
+        b.stroke();
+
+        //line
+        b.beginPath();
+        b.moveTo(0,0)
+        b.lineTo(600,600)
+        b.lineWidth="8"
+        b.strokeStyle="orange"
+        b.lineCap="round"
+        b.stroke() 
+        b.closePath() 
+
+        // //circle
+        b.beginPath();
+        b.lineWidth="1";
+        b.arc(250,500,50,0,2*Math.PI);
+        b.fillStyle="yellow";
+        b.fill();
+        b.strokeStyle="black";
+        b.stroke();
+        b.closePath()
+
+        //Text
+        b.beginPath()
+        b.fillStyle="black"
+        b.font = "20px Arial"
+        b.fillText("Hello World",250,300);
+        b.closePath();
+
+        b.beginPath()
+  
+        b.fillStyle="blue"
+        b.font="30px arial"
+        b.fillText("Hello",200,130)
+        b.closePath()
+
+        //curve
+        b.beginPath()
+        b.moveTo(20,20)
+        b.lineTo(100,20)
+        b.arcTo(150, 20, 150, 70, 50);
+        b.lineTo(150, 120);
+        b.lineWidth="3"
+        b.strokeStyle ="red"
+        b.stroke()
+        b.closePath()
+
+        //semicircle
+        b.beginPath()
+        b.moveTo(200, 200);
+        b.bezierCurveTo(200, 300, 400, 300, 400, 200);
+        b.strokeStyle="green"
+        b.stroke();
+        b.closePath()
+
+        //arc or curve unconventional 
+        b.beginPath()
+        b.moveTo(90,90)
+        b.quadraticCurveTo(90,120,130,90)
+        b.strokeStyle="purple"
+        b.stroke()
+        b.closePath()
+
+        //bar
+
+        b.beginPath()
+        b.strokeStyle="brown"
+        b.strokeRect(150,220,40,100)
+        b.closePath()
+
+        //eclips
+        b.beginPath()
+        b.ellipse(390,390,50,20,0,0,2*Math.PI)
+        b.strokeStyle ="orange"
+        b.stroke()
+        b.closePath()
+
+    </script>
+
+    
+</body>
+</html>

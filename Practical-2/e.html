@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Album Sales Chart</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        .chart {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .bar-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+        .bar {
+            width: 60px;
+            background-color: red;
+            color: white;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+            transition: height 0.5s ease-in-out;
+        }
+        .label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: black;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Album Sales Chart</h2>
+    <div class="chart" id="salesChart"></div>
+
+    <script>
+        $(document).ready(function () {
+            $.get("sales.csv", function (data) {
+                var lines = data.trim().split("\n");
+                var chart = $("#salesChart");
+                
+                var maxSales = 0;
+                lines.forEach(function (line) {
+                    var parts = line.split(",");
+                    var salesValue = parseInt(parts[1].replace(/,/g, ""));
+                    if (salesValue > maxSales) {
+                        maxSales = salesValue;
+                    }
+                });
+                
+                // Scale factor (300px is the available height for bars)
+                var scaleFactor = 300 / maxSales;
+                
+                lines.forEach(function (line) {
+                    var parts = line.split(",");
+                    var albumName = parts[0].trim();
+                    var salesValue = parseInt(parts[1].replace(/,/g, ""));
+                    
+                    // Calculate bar height based on sales
+                    var barHeight = Math.round(salesValue * scaleFactor);
+                    
+                    // Format sales for display (e.g., 950,000 -> 950K)
+                    var displaySales = salesValue+"K";
+                    
+                    var barWrapper = $("<div></div>").addClass("bar-wrapper");
+                    
+                    var bar = $("<div></div>").addClass("bar").css({
+                        height: barHeight + "px"
+                    }).text(displaySales);
+                    
+                    // Label (album name) below the bar
+                    var label = $("<div></div>").addClass("label").text(albumName);
+                    
+                    // Append elements to wrapper, then to chart
+                    barWrapper.append(bar, label);
+                    chart.append(barWrapper);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

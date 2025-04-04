@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Shapes Demo</title>
+  <style>
+    svg {
+      border: 1px solid #ccc;
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">SVG Shapes Demo</h2>
+
+  <svg width="400" height="400">
+    <!-- Rectangle -->
+    <rect x="10" y="10" width="100" height="50" fill="skyblue" stroke="blue" stroke-width="2" />
+
+    <!-- Circle -->
+    <circle cx="200" cy="50" r="40" fill="lightgreen" stroke="green" stroke-width="2" />
+
+    <!-- Ellipse -->
+    <ellipse cx="100" cy="150" rx="60" ry="30" fill="lightcoral" stroke="red" stroke-width="2" />
+
+    <!-- Line -->
+    <line x1="50" y1="200" x2="200" y2="250" stroke="black" stroke-width="2" />
+
+    <!-- Polygon -->
+    <polygon points="300,50 350,100 300,150 250,100" fill="gold" stroke="orange" stroke-width="2" />
+
+    <!-- Polyline -->
+    <polyline points="50,300 100,350 150,300 200,350" fill="none" stroke="purple" stroke-width="2" />
+
+    <!-- Path -->
+    <path d="M50 350 Q150 300 250 350 T350 350" fill="none" stroke="brown" stroke-width="2" />
+  </svg>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Indian Cultural Places</title>
+  </head>
+
+  <body onload="loadMap()">
+    <h2>Indian Cultural Places</h2>
+    <div id="map" style="width:640px; height:480px;"></div>
+      <script>
+
+        async function getJSONMarkers() {
+          const response = await fetch('places.json');
+          const markers = await response.json();
+          return markers;
+        }
+
+        async function loadMap() {
+          const mapOptions = {
+            center: new google.maps.LatLng(20.5937, 78.9629),
+            zoom: 5
+          }
+          const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+          // Load JSON Data
+          const culturalMarkers = await getJSONMarkers();
+
+          // Initialize Google Markers
+          for (let place of culturalMarkers) {
+            let marker = new google.maps.Marker({
+              map: map,
+              position: new google.maps.LatLng(place.location[0], place.location[1]),
+              title: place.name
+            });
+          }
+        }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js"></script>
+  </body>
+</html>

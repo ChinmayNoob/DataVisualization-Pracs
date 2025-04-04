@@ -1,0 +1,20 @@
+{
+    "album":[
+        {
+            "name":"Graduation",
+            "sales": 950000
+        },
+        {
+            "name":"Blonde",
+            "sales":700000
+        },
+        {
+            "name":"To Pimp a Butterfly",
+            "sales":1000000
+        },
+        {
+            "name":"Rodeo",
+            "sales":500000
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<students>
+    <student>
+        <name>Chinmay</name>
+        <score>5</score>
+    </student>
+    <student>
+        <name>Trupal</name>
+        <score>8</score>
+    </student>
+    <student>
+        <name>Pratik</name>
+        <score>6</score>
+    </student>
+    <student>
+        <name>Srujal</name>
+        <score>6</score>
+    </student>
+</students>
