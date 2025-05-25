@@ -22,12 +22,13 @@
     <canvas id="barchart" width="500" height="500"></canvas>
     <script>
         $(document).ready(function() {
+            
             const canvas = $('#barchart')[0];
             const ctx = canvas.getContext('2d');
 
             const data = [100, 200, 150, 250, 300];
             const labels = ['A', 'B', 'C', 'D', 'E'];
-
+            
             const barWidth = 50;
             const barSpacing = 10;
             const startX = 10;

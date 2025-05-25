@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Age Group Column Chart</title>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+  <h2>Column Chart for Age Groups</h2>
+  <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+  <script>
+    window.onload = function () {
+      var chart = new CanvasJS.Chart("chartContainer", {
+        title: { text: "Age Groups Distribution" },
+        data: [{
+          type: "column",
+          dataPoints: [
+            { label: "0-18", y: 15 },
+            { label: "19-35", y: 25 },
+            { label: "36-60", y: 20 },
+            { label: "60+", y: 10 }
+          ]
+        }]
+      });
+      chart.render();
+    }
+  </script>
+</body>
+</html>

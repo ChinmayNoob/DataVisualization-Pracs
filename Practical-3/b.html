@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stacked Column Chart</title>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+  <h2>Stacked Column Chart</h2>
+  <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+  <script>
+    window.onload = function () {
+      var chart = new CanvasJS.Chart("chartContainer", {
+        title: { text: "Stacked Column Chart" },
+        axisY: { title: "Values" },
+        data: [
+          {
+            type: "stackedColumn",
+            name: "Category A",
+            showInLegend: true,
+            dataPoints: [
+              { label: "2019", y: 10 },
+              { label: "2020", y: 15 }
+            ]
+          },
+          {
+            type: "stackedColumn",
+            name: "Category B",
+            showInLegend: true,
+            dataPoints: [
+              { label: "2019", y: 20 },
+              { label: "2020", y: 25 }
+            ]
+          }
+        ]
+      });
+      chart.render();
+    }
+  </script>
+</body>
+</html>

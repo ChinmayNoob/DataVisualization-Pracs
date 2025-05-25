@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Line Charts</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+  <h2>D3.js Single Line Chart</h2>
+  <svg id="lineChart" width="500" height="300"></svg>
+
+  <h2>CanvasJS Multiple Line Chart</h2>
+  <div id="canvasLine" style="height: 300px; width: 100%;"></div>
+
+  <script>
+    // D3 Line Chart
+    const data = [10, 20, 15, 30, 25];
+    const svg = d3.select("#lineChart");
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+
+    const x = d3.scaleLinear().domain([0, data.length - 1]).range([40, width - 20]);
+    const y = d3.scaleLinear().domain([0, d3.max(data)]).range([height - 20, 20]);
+
+    const line = d3.line()
+      .x((d, i) => x(i))
+      .y(d => y(d));
+
+    svg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 2)
+      .attr("d", line);
+
+    // CanvasJS Line Chart
+    window.onload = function () {
+      var chart = new CanvasJS.Chart("canvasLine", {
+        title: { text: "Multiple Line Chart" },
+        data: [
+          {
+            type: "line",
+            name: "2020",
+            showInLegend: true,
+            dataPoints: [
+              { x: 1, y: 10 }, { x: 2, y: 20 }, { x: 3, y: 15 }
+            ]
+          },
+          {
+            type: "line",
+            name: "2021",
+            showInLegend: true,
+            dataPoints: [
+              { x: 1, y: 15 }, { x: 2, y: 25 }, { x: 3, y: 30 }
+            ]
+          }
+        ]
+      });
+      chart.render();
+    }
+  </script>
+</body>
+</html>

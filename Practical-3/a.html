@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Column Chart</title>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+  <h2>Simple Column Chart</h2>
+  <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+  <script>
+    window.onload = function () {
+      var chart = new CanvasJS.Chart("chartContainer", {
+        title: { text: "Column Chart" },
+        data: [{
+          type: "column",
+          dataPoints: [
+            { label: "A", y: 10 },
+            { label: "B", y: 25 },
+            { label: "C", y: 30 },
+            { label: "D", y: 15 }
+          ]
+        }]
+      });
+      chart.render();
+    }
+  </script>
+</body>
+</html>

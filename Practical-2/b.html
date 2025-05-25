@@ -30,6 +30,8 @@
         $(document).ready(function(){
             $.get("albums.txt",function(line){
                 var lines = line.split("\n")
+                let alertText = "Sr No\tArtist\t\tAlbum\n";
+
                 for(i=0;i<lines.length;i++){
                     var cols = lines[i].split(" ");
                     var row = `
@@ -40,7 +42,11 @@
                     </tr>
                     `
                     $("#datatable").append(row);
+                    // alert(`Sr No: ${cols[0]}\nArtist: ${cols[1]}\nAlbum: ${cols[2]}`);
+                    alertText += `${cols[0]}\t${cols[1]}\t${cols[2]}\n`;
                 }
+                alert(alertText);
+
             })
         })
     </script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bar Charts</title>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+  <h2>Simple Bar Chart</h2>
+  <div id="bar1" style="height: 300px; width: 100%;"></div>
+
+  <h2>Multiple Bar Chart</h2>
+  <div id="bar2" style="height: 300px; width: 100%;"></div>
+
+  <script>
+    window.onload = function () {
+      new CanvasJS.Chart("bar1", {
+        title: { text: "Simple Bar Chart" },
+        data: [{
+          type: "bar",
+          dataPoints: [
+            { label: "X", y: 20 },
+            { label: "Y", y: 40 }
+          ]
+        }]
+      }).render();
+
+      new CanvasJS.Chart("bar2", {
+        title: { text: "Multiple Bar Chart" },
+        data: [
+          {
+            type: "bar",
+            name: "Group A",
+            showInLegend: true,
+            dataPoints: [
+              { label: "Q1", y: 25 },
+              { label: "Q2", y: 30 }
+            ]
+          },
+          {
+            type: "bar",
+            name: "Group B",
+            showInLegend: true,
+            dataPoints: [
+              { label: "Q1", y: 20 },
+              { label: "Q2", y: 40 }
+            ]
+          }
+        ]
+      }).render();
+    }
+  </script>
+</body>
+</html>

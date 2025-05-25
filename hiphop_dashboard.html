@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hip Hop Artists Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            color: #212529;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #ff4141;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        .filters select {
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #212529;
+        }
+
+        .charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .chart-card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        canvas, #piechart {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+        @media (max-width: 768px) {
+            .charts {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Hip Hop Artists Dashboard</h1>
+    </header>
+
+    <div class="filters">
+        <select id="yearFilter" onchange="updateDashboard()">
+            <option value="2024">2024</option>
+        </select>
+        <select id="artistFilter" onchange="updateDashboard()">
+            <option value="All">All</option>
+            <option value="Drake">Drake</option>
+            <option value="Kendrick Lamar">Kendrick Lamar</option>
+            <option value="Kanye West">Kanye West</option>
+            <option value="Travis Scott">Travis Scott</option>
+        </select>
+    </div>
+
+    <div class="charts">
+        <div class="chart-card">
+            <canvas id="barChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <div id="piechart"></div>
+        </div>
+        <div class="chart-card">
+            <canvas id="lineChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const hipHopData = [
+            {
+                year: "2024",
+                artist: "Drake",
+                genre: "Rap",
+                streams: 9500,
+                followers: 800,
+                albumsSold: 2500,
+                concertRevenue: 3000,
+                merchRevenue: 1500,
+                topSong: "Hotline Bling",
+                monthlyStreams: [800, 850, 870, 890, 910, 950, 960, 980, 995, 1000, 1010, 1020]
+            },
+            {
+                year: "2024",
+                artist: "Kendrick Lamar",
+                genre: "Conscious Rap",
+                streams: 8700,
+                followers: 600,
+                albumsSold: 2200,
+                concertRevenue: 2800,
+                merchRevenue: 1200,
+                topSong: "Alright",
+                monthlyStreams: [700, 720, 740, 765, 790, 810, 825, 850, 875, 900, 930, 950]
+            },
+            {
+                year: "2024",
+                artist: "Kanye West",
+                genre: "Experimental Hip Hop",
+                streams: 9100,
+                followers: 750,
+                albumsSold: 2400,
+                concertRevenue: 3200,
+                merchRevenue: 1700,
+                topSong: "Stronger",
+                monthlyStreams: [750, 770, 780, 800, 820, 840, 870, 890, 900, 930, 940, 960]
+            },
+            {
+                year: "2024",
+                artist: "Travis Scott",
+                genre: "Trap",
+                streams: 8800,
+                followers: 720,
+                albumsSold: 2300,
+                concertRevenue: 3100,
+                merchRevenue: 1600,
+                topSong: "SICKO MODE",
+                monthlyStreams: [720, 740, 755, 770, 790, 810, 835, 850, 870, 890, 910, 925]
+            }
+        ];
+
+        let barChart, lineChart;
+
+        function updateDashboard() {
+            const year = document.getElementById("yearFilter").value;
+            const artist = document.getElementById("artistFilter").value;
+
+            const filteredData = hipHopData.filter(d => d.year === year && (artist === "All" || d.artist === artist));
+
+            const labels = filteredData.map(d => d.artist);
+            const streams = filteredData.map(d => d.streams);
+            const monthlyStreams = filteredData.length === 1 ? filteredData[0].monthlyStreams : Array(12).fill(0);
+
+            // Bar Chart
+            if (barChart) barChart.destroy();
+            barChart = new Chart(document.getElementById("barChart"), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Streams (in thousands)',
+                        data: streams,
+                        backgroundColor: ['#ff6384', '#36a2eb', '#ff9f40', '#4bc0c0']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { labels: { color: '#212529' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#212529' } },
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#212529' }
+                        }
+                    }
+                }
+            });
+
+            // Line Chart
+            if (lineChart) lineChart.destroy();
+            lineChart = new Chart(document.getElementById("lineChart"), {
+                type: 'line',
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [filteredData.length === 1 ? {
+                        label: `${filteredData[0].artist} Monthly Streams`,
+                        data: monthlyStreams,
+                        fill: false,
+                        borderColor: '#ff4141',
+                        tension: 0.1
+                    } : {
+                        label: "Monthly Streams",
+                        data: monthlyStreams,
+                        borderColor: '#888',
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { labels: { color: '#212529' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#212529' } },
+                        y: { ticks: { color: '#212529' } }
+                    }
+                }
+            });
+
+            // Pie Chart using Google Charts
+            google.charts.load("current", {packages:["corechart"]});
+            google.charts.setOnLoadCallback(drawPieChart);
+
+            function drawPieChart() {
+                const genreCounts = {};
+                filteredData.forEach(d => {
+                    genreCounts[d.genre] = (genreCounts[d.genre] || 0) + d.streams;
+                });
+
+                const data = new google.visualization.DataTable();
+                data.addColumn('string', 'Genre');
+                data.addColumn('number', 'Streams');
+                for (const genre in genreCounts) {
+                    data.addRow([genre, genreCounts[genre]]);
+                }
+
+                const options = {
+                    backgroundColor: '#ffffff',
+                    legend: { textStyle: { color: '#212529' } },
+                    titleTextStyle: { color: '#212529' },
+                    pieSliceTextStyle: { color: '#212529' }
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                chart.draw(data, options);
+            }
+        }
+
+        updateDashboard();
+    </script>
+</body>
+</html>

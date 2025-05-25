@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pie Charts</title>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+  <h2>Single Pie Chart</h2>
+  <div id="pie1" style="height: 300px; width: 100%;"></div>
+
+  <h2>Multiple Pie Chart</h2>
+  <div id="pie2" style="height: 300px; width: 100%;"></div>
+  <div id="pie3" style="height: 300px; width: 100%;"></div>
+
+  <script>
+    window.onload = function () {
+      new CanvasJS.Chart("pie1", {
+        title: { text: "Single Pie" },
+        data: [{
+          type: "pie",
+          dataPoints: [
+            { label: "A", y: 40 },
+            { label: "B", y: 30 },
+            { label: "C", y: 30 }
+          ]
+        }]
+      }).render();
+
+      new CanvasJS.Chart("pie2", {
+        title: { text: "Fruits" },
+        data: [{
+          type: "pie",
+          dataPoints: [
+            { label: "Apple", y: 60 },
+            { label: "Banana", y: 40 }
+          ]
+        }]
+      }).render();
+
+      new CanvasJS.Chart("pie3", {
+        title: { text: "Vegetables" },
+        data: [{
+          type: "pie",
+          dataPoints: [
+            { label: "Carrot", y: 70 },
+            { label: "Spinach", y: 30 }
+          ]
+        }]
+      }).render();
+    }
+  </script>
+</body>
+</html>
